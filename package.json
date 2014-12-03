@@ -1,0 +1,25 @@
+{
+  "name": "movie_app",
+  "version": "1.0.0",
+  "description": "movie_app =========",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bivdub/movie_app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bivdub/movie_app/issues"
+  },
+  "homepage": "https://github.com/bivdub/movie_app",
+  "dependencies": {
+    "body-parser": "^1.9.3",
+    "ejs": "^1.0.0",
+    "express": "^4.10.4",
+    "request": "^2.49.0"
+  }
+}

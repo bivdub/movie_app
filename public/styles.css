@@ -1,0 +1,32 @@
+.navbar {
+	background-color: #41507F;
+}
+
+h3 {
+	font-weight: bold;
+	color: #839FFF;
+	
+}
+
+h1 {
+	color: #B6C5FF;
+}
+
+p {
+	font-size: 1.75em;
+}
+
+body {
+	background-color: #1B327F;
+	font-family: 'Fjalla One', sans-serif;
+
+}
+
+a:hover {
+	color: #CFE3FF;
+	text-decoration: none;
+}
+
+.navbar-form {
+	font-size: 2em;
+}
