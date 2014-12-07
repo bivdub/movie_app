@@ -1,9 +1,14 @@
 <% include header %>
-<div class="container text-center">
+<div class="container">
 	<h1> Search Results </h1>
 	<% for(var i=0; i<stuff.Search.length; i++) { %>
-	<p><a href="/movies/<%= stuff.Search[i].imdbID %>"> 
-		<%= stuff.Search[i].Title %> </a></p>
-	<% } %>
+	<a href="/movies/<%= stuff.Search[i].imdbID %>" class="text-left"> 
+		<%= stuff.Search[i].Title %> </a>
+		<form action="/browse" method="post" class="text-right">
+		<input value="<%=stuff.Search[i].imdbID %>" type="hidden" name="imdbCode">
+		<input type="submit"  value="add to list" class="btn btn-default text-right">
+		</form> 
+
+		<% } %>
 </div>
 <% include footer %>

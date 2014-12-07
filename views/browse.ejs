@@ -1,0 +1,8 @@
+<% include header %>
+<div class="container">
+<% for(var i=0; i<data.length; i++) { %>
+<div class="row text-center">
+	<h2><a href="/movies/<%=data[i].dataValues.imdb_code%>"><%=data[i].dataValues.title%>       </a><small><%=data[i].dataValues.year%></small></h2>
+</div>
+<% } %>
+<% include footer %>
