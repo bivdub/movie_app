@@ -6,7 +6,13 @@
 	<h3> Year: <%= Year %> </h3>
 	<h3> Genre: <%= Genre %> </h3>
 	<h3> Actors: <%= Actors %> </h3>
+	<h3> Director: <%= Director %></h3>
+	<h3> Writer(s): <%= Writer %></h3>
 	<h3> TOMATOES: <%= tomatoMeter %> </h3>
+	<form action="/browse" method="post" class="text-left">
+		<input value="<%= imdbID %>" type="hidden" name="imdbCode">
+		<input type="submit"  value="add to list" class="btn btn-default text-left">
+	</form> 
 </div>
 	<div class="col-xs-4"><img src=<%= Poster %>></div>
 </div>
