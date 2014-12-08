@@ -1,13 +1,29 @@
 <% include header %>
 <div class="container text-center">
-<h1>The Watch List</h1>
-<% for(var i=0; i<data.length; i++) { %>
-<div class="row text-center">
-	<form action="/delete" method="post">
+<div>
+	<table class="table table-bordered text-center">
+		<caption><h1 class="text-center">The Watch List</h1></caption>
+		<thead>
+			<tr>
+				<th class="text-center">remove</th>
+				<th class="text-center">title</th>
+				<th class="text-center">year</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+			<% for(var i=0; i<data.length; i++) { %>
+				<td><form action="/delete" method="post">
 		<input value="<%=data[i].dataValues.imdb_code %>" type="hidden" name="imdbCode">
-		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-minus"></span></button>
-		<a href="/movies/<%=data[i].dataValues.imdb_code%>"><%=data[i].dataValues.title%>&nbsp</a><small><%=data[i].dataValues.year%></small>
+		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-minus"></span></button></td>
+				<td><a href="/movies/<%=data[i].dataValues.imdb_code%>"><%=data[i].dataValues.title%>&nbsp</a></td>
+				<td><h4><%=data[i].dataValues.year%></h4></td>
+			</tr>
+			<% } %>
+		</tbody>
+	</table>
+	
+		
 	</form>
 </div>
-<% } %>
 <% include footer %>

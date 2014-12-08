@@ -8,6 +8,8 @@ small {
 	margin-right: 1em;
 }
 
+
+
 .navbar-nav {
 	margin-top: .5em;
 	border-radius: 5%;
@@ -26,6 +28,14 @@ h3 {
 	color: #2B2B2B;
 	
 }
+th {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+td {
+	padding: auto;
+}
 
 h1 {
 	color: #DE1B1B;
@@ -41,7 +51,7 @@ body {
 
 }
 
-a {
+a, h4 {
 	color: #2B2B2B;
 	font-size: 2em;
 	line-height: 2em;
