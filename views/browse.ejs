@@ -11,15 +11,15 @@
 			</tr>
 		</thead>
 		<tbody>
+		<% for(var i=0; i<data.length; i++) { %>
 			<tr>
-			<% for(var i=0; i<data.length; i++) { %>
-				<td><form action="/delete" method="post">
-		<input value="<%=data[i].dataValues.imdb_code %>" type="hidden" name="imdbCode">
-		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-minus"></span></button></td>
+				<td>
+				<a href='#' data-id="<%= data[i].dataValues.id %>" class="btn btn-primary deleteThis"><span class="glyphicon glyphicon-minus"></span></a>
+				</td>
 				<td><a href="/movies/<%=data[i].dataValues.imdb_code%>"><%=data[i].dataValues.title%>&nbsp</a></td>
 				<td><h4><%=data[i].dataValues.year%></h4></td>
 			</tr>
-			<% } %>
+		<% } %>
 		</tbody>
 	</table>
 	

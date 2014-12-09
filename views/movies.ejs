@@ -1,4 +1,17 @@
-<% include header %>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Watch List!</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+	<script src="/script.js"></script>
+</head>
+<body>
 <div class="container">
 <div class="row">
 <div class="col-xs-8">
@@ -9,10 +22,11 @@
 	<h3> Director: <%= Director %></h3>
 	<h3> Writer(s): <%= Writer %></h3>
 	<h3> TOMATOES: <%= tomatoMeter %> </h3>
-	<form action="/browse" method="post" class="text-left">
+	<!-- <form action="/browse" method="post" class="text-left">
 		<input value="<%= imdbID %>" type="hidden" name="imdbCode">
 		<input type="submit"  value="add to list" class="btn btn-default text-left">
-	</form> 
+	</form>  -->
+	<a href='#' data-id="<%= imdbID %>" data-title="<%= Title %>" data-year="<%= Year %>" class="btn btn-primary addThis"><span class="glyphicon glyphicon-plus"></span></a>
 </div>
 	<div class="col-xs-4"><img src=<%= Poster %>></div>
 </div>

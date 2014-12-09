@@ -3,12 +3,36 @@
 	<h1> Search Results </h1>
 	<% for(var i=0; i<stuff.Search.length; i++) { %>
 	<div class="row text-center">
-	<form action="/browse" method="post">
-		<a href="/movies/<%= stuff.Search[i].imdbID %>"><%= stuff.Search[i].Title %> </a>
-		<input value="<%=stuff.Search[i].imdbID %>" type="hidden" name="imdbCode">
-		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
-	</form> 
+		<form action="/browse" method="post">
+			<a href="/movies/<%= stuff.Search[i].imdbID %>" data-toggle="modal"
+			data-target=".<%= stuff.Search[i].imdbID %>"><%= stuff.Search[i].Title %> </a>
+			<a href='#' data-id="<%= stuff.Search[i].imdbID %>" data-title="<%= stuff.Search[i].Title %>" data-year="<%=stuff.Search[i].Year %>" class="btn btn-primary addThis"><span class="glyphicon glyphicon-plus"></span></a>
+		</form> 
 	</div>
-		<% } %>
 </div>
+<div class="modal fade bs-example-modal-lg <%= stuff.Search[i].imdbID %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-8">
+						<h3> Title: <%= stuff.Search[i].Title %> </h3>
+						<h3> Year: <%= stuff.Search[i].Year %> </h3>
+						<h3> Genre: <%= stuff.Search[i].Genre %> </h3>
+						<h3> Actors: <%= stuff.Search[i].Actors %> </h3>
+						<h3> Director: <%= stuff.Search[i].Director %></h3>
+						<h3> Writer(s): <%= stuff.Search[i].Writer %></h3>
+						<h3> TOMATOES: <%= stuff.Search[i].tomatoMeter %> </h3>
+						<a href='#' data-id="<%= stuff.Search[i].imdbID %>" data-title="<%= stuff.Search[i].Title %>" data-year="<%= stuff.Search[i].Year %>" class="btn btn-primary addThis"><span class="glyphicon glyphicon-plus"></span></a>
+					</div>
+					<% if (stuff.Search[i].Poster) { %>
+					<div class="col-xs-4"><img src="<%=stuff.Search[i].Poster %>"></div>
+					<% } %>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+	<% } %>
 <% include footer %>
