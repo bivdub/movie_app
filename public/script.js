@@ -34,6 +34,20 @@ $(function() {
 		)
 	})
 
+	$('.comment').on('click', function(event) {
+		event.preventDefault();
+		// alert('yo!');
+		var button = $(this);
+		var comment = $('#comment').val();
+
+		console.log(comment);
+		console.log(body);
+		$.post('/movie:id', function(data) {
+				alert('yo');
+			}
+		)
+	})
+
 });
 
 

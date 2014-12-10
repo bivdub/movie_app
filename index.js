@@ -42,7 +42,26 @@ app.get('/movies/:id', function(req, res) {
 		} else if (!error && response.statusCode == 200) {
 			var data = JSON.parse(body);
 			// console.log(data);
-			res.render('movies', data);
+			var imdb = data.imdbID;
+			db.movie.find({where: {imdb_code: imdb}}).then(function(movieInfo) {
+				var commentId = movieInfo.dataValues.id;
+				console.log(commentId);
+				db.comment.findAll({where: {movieId: commentId}}).then(function(comment) {
+					console.log(comment);
+					console.log(data);
+					if (comment==[]) {
+						res.render('movies',{data: data, comment:''});
+					} else {
+					res.render('movies', {data: data, comment: comment});
+					}
+				})
+			})
+			// db.comment.findAll({where: {: comment.movieId}}).spread(function(comment, created) {
+			// 	res.render('movies', {data: data, comment: comment});
+			// 	if (!created) {
+			// 		res.render('movies', data);
+			// 	}
+			// })
 		}
 	})
 })
@@ -51,7 +70,7 @@ app.get('/movies/:id', function(req, res) {
 // app.post('/browse', function (req, res) {
 // 	// console.log(req.body.imdbCode);
 // 	imdbCode = req.body.imdbCode;
-// 	db.Movie.findOrCreate({where: {imdb_code: imdbCode}}).done(function (error, data, created) {
+// 	db.movie.findOrCreate({where: {imdb_code: imdbCode}}).done(function (error, data, created) {
 // 		if(created) {
 // 			// console.log('here2');
 // 			request('http://www.omdbapi.com/?i='+imdbCode, function(error, response, body) {
@@ -60,7 +79,7 @@ app.get('/movies/:id', function(req, res) {
 // 					data.title = movieData.Title;
 // 					data.year = movieData.Year;
 // 					data.save().done(function (error, data) {
-// 						var data = db.Movie.findAll().done(function(error, data) {
+// 						var data = db.movie.findAll().done(function(error, data) {
 // 						res.render('browse', {data:data});
 // 						})					
 // 					})
@@ -68,7 +87,7 @@ app.get('/movies/:id', function(req, res) {
 // 			})
 // 		} else {
 // 			// console.log(db);
-// 			var data = db.Movie.findAll().done(function(error, data) {
+// 			var data = db.movie.findAll().done(function(error, data) {
 // 				res.render('browse', {data: data});
 // 			})
 
@@ -78,18 +97,18 @@ app.get('/movies/:id', function(req, res) {
 
 app.post('/browse', function (req, res) {
 
-	db.Movie.findOrCreate({where: {imdb_code: req.body.imdb_code}}).done(function (error, data, created) {
+	db.movie.findOrCreate({where: {imdb_code: req.body.imdb_code}}).done(function (error, data, created) {
 		if(created) {
 			data.title = req.body.title;
 			data.year = req.body.year;
 			data.save().done(function (error, data) {
-				var data = db.Movie.findAll().done(function(error, data) {
+				var data = db.movie.findAll().done(function(error, data) {
 					res.send({something:'ok'});
 				})					
 			})
 		} else {
 			console.log(db);
-			var data = db.Movie.findAll().done(function(error, data) {
+			var data = db.movie.findAll().done(function(error, data) {
 				res.send({something:'ok'});
 			})
 
@@ -97,16 +116,25 @@ app.post('/browse', function (req, res) {
 	})
 })
 
+app.post('/comment', function (req, res) {
+	console.log('body', req.body);
+	db.movie.findOrCreate({where: {imdb_code: req.body.imdbCode}}).spread(function(movie, created) {
+	  movie.createComment({content: req.body.comment}).then(function(data) {
+	    res.refresh();
+	  });
+	})
+})
+
 app.delete('/browse/:id', function (req, res) {
 
-	db.Movie.destroy({where: { id: req.params.id}}).then(function(data) {
+	db.movie.destroy({where: { id: req.params.id}}).then(function(data) {
 		console.log('here');
 		res.send({something: 'something'});
 	})
 });
 
 app.get('/browse', function(req, res) {
-	var data = db.Movie.findAll().done(function(error, data) {
+	var data = db.movie.findAll().done(function(error, data) {
 		res.render('browse', {data: data});
 	})
 })

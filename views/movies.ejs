@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<% include header %>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -11,25 +12,46 @@
 	<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
 	<script src="/script.js"></script>
 </head>
-<body>
+<body> -->
 <div class="container">
 <div class="row">
 <div class="col-xs-8">
-	<h3> Title: <%= Title %> </h3>
-	<h3> Year: <%= Year %> </h3>
-	<h3> Genre: <%= Genre %> </h3>
-	<h3> Actors: <%= Actors %> </h3>
-	<h3> Director: <%= Director %></h3>
-	<h3> Writer(s): <%= Writer %></h3>
-	<h3> TOMATOES: <%= tomatoMeter %> </h3>
-	<!-- <form action="/browse" method="post" class="text-left">
-		<input value="<%= imdbID %>" type="hidden" name="imdbCode">
-		<input type="submit"  value="add to list" class="btn btn-default text-left">
-	</form>  -->
-	<a href='#' data-id="<%= imdbID %>" data-title="<%= Title %>" data-year="<%= Year %>" class="btn btn-primary addThis"><span class="glyphicon glyphicon-plus"></span></a>
+	<h3> Title: <%= data.Title %> </h3>
+	<h3> Year: <%= data.Year %> </h3>
+	<h3> Genre: <%= data.Genre %> </h3>
+	<h3> Actors: <%= data.Actors %> </h3>
+	<h3> Director: <%= data.Director %></h3>
+	<h3> Writer(s): <%= data.Writer %></h3>
+	<h3> TOMATOES: <%= data.tomatoMeter %> </h3>
+	
+	<table class="table table-bordered">
+		<caption><h1 class="text-center">comments (<%=comment.length%>)</h1></caption>
+		<thead>
+			<tr>
+				<th class="text-center"></th>
+				<th class="text-left">comment</th>
+			</tr>
+		</thead>
+		<tbody>
+	<% for (var i = 0; i < comment.length; i++) { %>
+	<tr>
+		<td></td>
+		<td><p> <%= comment[i].content %> </p></td>
+	</tr>
+	<% } %>
+		</tbody>
+	</table>
+	
+	<a href='#' data-id="<%= data.imdbID %>" data-title="<%= data.Title %>" data-year="<%= data.Year %>" class="btn btn-primary addThis"><span class="glyphicon glyphicon-plus"></span></a>
 </div>
-	<div class="col-xs-4"><img src=<%= Poster %>></div>
+	<div class="col-xs-4"><img src=<%= data.Poster %>></div>
 </div>
+	
+	<form action="/comment" method="post">
+	<input type="hidden" value="<%= data.imdbID %>" name="imdbCode">
+	<textarea name="comment" rows="5" cols="40"></textarea><br>
+	<input type="submit" value="comment" class="btn btn-primary" id="comment">
+	</form>
 
 </div>
 <% include footer %>

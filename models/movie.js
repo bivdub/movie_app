@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-  var Movie = sequelize.define("Movie", {
+  var movie = sequelize.define("movie", {
     imdb_code: DataTypes.STRING,
     title: DataTypes.STRING,
     year: DataTypes.INTEGER
@@ -9,9 +9,10 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        models.movie.hasMany(models.comment);
       }
     }
   });
 
-  return Movie;
+  return movie;
 };
