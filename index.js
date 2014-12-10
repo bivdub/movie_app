@@ -44,7 +44,9 @@ app.get('/movies/:id', function(req, res) {
 			// console.log(data);
 			var imdb = data.imdbID;
 			db.movie.find({where: {imdb_code: imdb}}).then(function(movieInfo) {
-				var commentId = movieInfo.dataValues.id;
+				if (movieInfo!= null) {
+					var commentId = movieInfo.dataValues.id;
+				}
 				console.log(commentId);
 				db.comment.findAll({where: {movieId: commentId}}).then(function(comment) {
 					console.log(comment);
@@ -55,6 +57,8 @@ app.get('/movies/:id', function(req, res) {
 					res.render('movies', {data: data, comment: comment});
 					}
 				})
+				// res.render('movies', {data: data, comment: ''});
+
 			})
 			// db.comment.findAll({where: {: comment.movieId}}).spread(function(comment, created) {
 			// 	res.render('movies', {data: data, comment: comment});
@@ -119,9 +123,19 @@ app.post('/browse', function (req, res) {
 app.post('/comment', function (req, res) {
 	console.log('body', req.body);
 	db.movie.findOrCreate({where: {imdb_code: req.body.imdbCode}}).spread(function(movie, created) {
-	  movie.createComment({content: req.body.comment}).then(function(data) {
-	    res.refresh();
-	  });
+		if(created) {
+			movie.title = req.body.title;
+			movie.year = req.body.year;
+			movie.save().done(function (error, data) {
+	  			movie.createComment({content: req.body.comment}).then(function(data) {
+	    			res.render('comment', {something:'yay'});
+	  			});
+			})
+		} else {
+			movie.createComment({content: req.body.comment}).then(function(data) {
+	    	res.render('comment', {something:'yay'});
+	  		})
+	  	}
 	})
 })
 

@@ -12,6 +12,8 @@
 		</thead>
 		<tbody>
 		<% for(var i=0; i<data.length; i++) { %>
+
+
 			<tr>
 				<td>
 				<a href='#' data-id="<%= data[i].dataValues.id %>" class="btn btn-primary deleteThis"><span class="glyphicon glyphicon-minus"></span></a>
@@ -21,9 +23,7 @@
 			</tr>
 		<% } %>
 		</tbody>
-	</table>
-	
-		
+	</table>		
 	</form>
 </div>
 <% include footer %>

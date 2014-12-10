@@ -42,12 +42,11 @@ $(function() {
 
 		console.log(comment);
 		console.log(body);
-		$.post('/movie:id', function(data) {
+		$.post('/movie:id', body, function(data) {
 				alert('yo');
-			}
-		)
+			
+		})
 	})
 
-});
-
-
+})
+ 

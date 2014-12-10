@@ -41,7 +41,7 @@
 	<% } %>
 		</tbody>
 	</table>
-	
+
 	<a href='#' data-id="<%= data.imdbID %>" data-title="<%= data.Title %>" data-year="<%= data.Year %>" class="btn btn-primary addThis"><span class="glyphicon glyphicon-plus"></span></a>
 </div>
 	<div class="col-xs-4"><img src=<%= data.Poster %>></div>
@@ -49,6 +49,8 @@
 	
 	<form action="/comment" method="post">
 	<input type="hidden" value="<%= data.imdbID %>" name="imdbCode">
+	<input type="hidden" value="<%= data.Title %>" name="title">
+	<input type="hidden" value="<%= data.Year %>" name="year">
 	<textarea name="comment" rows="5" cols="40"></textarea><br>
 	<input type="submit" value="comment" class="btn btn-primary" id="comment">
 	</form>
